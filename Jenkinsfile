@@ -1,3 +1,5 @@
+currentBuild.displayName = "myappbuild-"+currentBuild.number
+
 pipeline{
     agent any
     
