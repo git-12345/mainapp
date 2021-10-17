@@ -1,0 +1,35 @@
+pipeline{
+    agent any
+    
+    stages{
+        stage("Git Checkout"){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Shivakumar1702/mainapp.git']]])
+            }
+        }
+        stage("Maven Build"){
+            steps{
+                sh 'mvn clean package -f pom.xml'
+            }
+        }
+        stage("Docker Image Build"){
+            steps{
+                sh 'docker image build -t shivakumar1702/customtomcat:latest .'
+            }
+        }
+        stage("Docker Hub push"){
+            steps{
+                withCredentials([string(credentialsId: 'e18d40b4-28c0-47d4-8773-b8fe6ffab420', variable: 'Dockerhub')]) {
+                sh "docker login -u shivakumar1702 -p ${Dockerhub}"
+}
+                sh 'docker push shivakumar1702/customtomcat:latest'
+                sh 'docker image rm shivakumar1702/customtomcat:latest'
+            }
+        }
+        stage("Docker Run"){
+            steps{
+                sh 'docker container run --name customtomcat --publish 80:8080 --detach shivakumar1702/customtomcat:latest'
+            }
+        }
+    }
+}
