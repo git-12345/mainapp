@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h2>Testing out the Docker Container!!</h2>
+<html>
+<head>
+<style>
+body {
+    background-image: url("images/im3.jpg");
+}
+.no-background {
+    background-image: url("images/blank.jpg");
+}
+  <h2>HELLO WORLD </h2>
 </body>
 <html>
