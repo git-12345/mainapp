@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
 <html>
 <head>
 <style>
@@ -10,6 +7,9 @@ body {
 .no-background {
     background-image: url("images/blank.jpg");
 }
-  <h2>HELLO WORLD </h2>
+</style>
+</head>
+<body>
+<h1 class="no-background">Hello World!</h1>
 </body>
-<html>
+</html>
